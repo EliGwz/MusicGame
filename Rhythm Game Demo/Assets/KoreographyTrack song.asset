@@ -1,0 +1,147 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1223223985, guid: aa81bbec85a3f423193272a7c6154986, type: 3}
+  m_Name: KoreographyTrack song
+  m_EditorClassIdentifier: 
+  mEventID: play
+  mEventList:
+  - mStartSample: 18501
+    mEndSample: 18501
+  - mStartSample: 26201
+    mEndSample: 26201
+  - mStartSample: 33902
+    mEndSample: 33902
+  - mStartSample: 41602
+    mEndSample: 41602
+  - mStartSample: 49303
+    mEndSample: 49303
+  - mStartSample: 57003
+    mEndSample: 57003
+  - mStartSample: 64653
+    mEndSample: 64653
+  - mStartSample: 72404
+    mEndSample: 72404
+  - mStartSample: 80105
+    mEndSample: 80105
+  - mStartSample: 87805
+    mEndSample: 87805
+  - mStartSample: 95506
+    mEndSample: 95506
+  - mStartSample: 103206
+    mEndSample: 103206
+  - mStartSample: 110907
+    mEndSample: 110907
+  - mStartSample: 118608
+    mEndSample: 118608
+  - mStartSample: 126308
+    mEndSample: 126308
+  - mStartSample: 141709
+    mEndSample: 141709
+  - mStartSample: 149410
+    mEndSample: 149410
+  - mStartSample: 157110
+    mEndSample: 157110
+  - mStartSample: 164811
+    mEndSample: 164811
+  - mStartSample: 172511
+    mEndSample: 172511
+  - mStartSample: 180212
+    mEndSample: 180212
+  - mStartSample: 187912
+    mEndSample: 187912
+  - mStartSample: 195613
+    mEndSample: 195613
+  - mStartSample: 203313
+    mEndSample: 203313
+  - mStartSample: 211014
+    mEndSample: 211014
+  - mStartSample: 218714
+    mEndSample: 218714
+  - mStartSample: 234116
+    mEndSample: 234116
+  - mStartSample: 249517
+    mEndSample: 249517
+  - mStartSample: 264918
+    mEndSample: 264918
+  - mStartSample: 280319
+    mEndSample: 280319
+  - mStartSample: 295720
+    mEndSample: 295720
+  - mStartSample: 311121
+    mEndSample: 311121
+  - mStartSample: 326522
+    mEndSample: 326522
+  - mStartSample: 341923
+    mEndSample: 341923
+  - mStartSample: 357324
+    mEndSample: 357324
+  - mStartSample: 372725
+    mEndSample: 372725
+  - mStartSample: 388126
+    mEndSample: 388126
+  - mStartSample: 403527
+    mEndSample: 403527
+  - mStartSample: 418928
+    mEndSample: 418928
+  - mStartSample: 434329
+    mEndSample: 434329
+  - mStartSample: 449731
+    mEndSample: 449731
+  - mStartSample: 465132
+    mEndSample: 465132
+  - mStartSample: 480533
+    mEndSample: 480533
+  - mStartSample: 495934
+    mEndSample: 495934
+  _SerializedPayloadTypes:
+  - SonicBloom.Koreo.TextPayload
+  _ColorPayloads: []
+  _ColorPayloadIdxs: 
+  _CurvePayloads: []
+  _CurvePayloadIdxs: 
+  _FloatPayloads: []
+  _FloatPayloadIdxs: 
+  _GradientPayloads: []
+  _GradientPayloadIdxs: 
+  _IntPayloads: []
+  _IntPayloadIdxs: 
+  _SpectrumPayloads: []
+  _SpectrumPayloadIdxs: 
+  _TextPayloads:
+  - mTextVal: 7
+  - mTextVal: 3
+  - mTextVal: 3
+  - mTextVal: 7
+  - mTextVal: 4
+  - mTextVal: 8
+  - mTextVal: 3
+  - mTextVal: 7
+  - mTextVal: 2
+  - mTextVal: 6
+  - mTextVal: 1
+  - mTextVal: 5
+  - mTextVal: 3
+  - mTextVal: 6
+  - mTextVal: 2
+  - mTextVal: 2
+  - mTextVal: 6
+  - mTextVal: 6
+  - mTextVal: 2
+  - mTextVal: 5
+  - mTextVal: 1
+  - mTextVal: 6
+  - mTextVal: 2
+  - mTextVal: 7
+  - mTextVal: 3
+  - mTextVal: 27
+  - mTextVal: 45
+  - mTextVal: 36
+  _TextPayloadIdxs: 000000000100000002000000030000000400000005000000060000000700000008000000090000000a0000000b0000000c0000000d0000000e0000000f000000100000001100000012000000130000001400000015000000160000001700000018000000190000001a0000001b000000
