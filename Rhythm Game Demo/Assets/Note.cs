@@ -97,19 +97,19 @@ public class Note : MonoBehaviour {
 
     // Checks to see if the note is no longer hittable based on the configured hit window width in
     //  samples.
-    public bool IsNoteMissed() {
-        bool bMissed = true;
+    //public bool IsNoteMissed() {
+    //    bool bMissed = true;
 
-        if (enabled) {
-            int noteTime = trackedEvent.StartSample;
-            int curTime = gameController.DelayedSampleTime;
-            int hitWindow = gameController.HitWindowSampleWidth;
+    //    if (enabled) {
+    //        int noteTime = trackedEvent.StartSample;
+    //        int curTime = gameController.DelayedSampleTime;
+    //        int hitWindow = gameController.HitWindowSampleWidth;
 
-            bMissed = (curTime - noteTime > hitWindow);
-        }
+    //        bMissed = (curTime - noteTime > hitWindow);
+    //    }
 
-        return bMissed;
-    }
+    //    return bMissed;
+    //}
 
     // Returns this Note Object to the pool which is controlled by the Rhythm Game Controller.  This
     //  helps reduce runtime allocations.

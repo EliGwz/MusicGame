@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Activator : MonoBehaviour {
 
+    
+
     public KeyCode key;
     bool active = false;
     GameObject note;
@@ -17,6 +19,9 @@ public class Activator : MonoBehaviour {
     Ray ray;//for tapping
     RaycastHit2D hit;
     int layerMask = 1 << 10;//only accept activator layer, which number is 10.
+    int noteLayerMask = 1 << 9;//note layer
+    int slideLayerMask = 1 << 11;//slider layer
+    int totalNoteLayerMask = 5 << 9;//note and slider
 
 	void Awake () {
         
@@ -32,48 +37,63 @@ public class Activator : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        //if (!createMode && Input.GetKeyDown(key)) {
-        //    StartCoroutine(Pressed());
-        //    if (active) {
-        //        Destroy(note);
-        //        gameManager.GetComponent<GameManager>().AddStreak();
-        //        active = false;
-        //        AddScore();
-        //    } else {//hit at a bad timing, which leads to resetting combo
-        //        gameManager.GetComponent<GameManager>().ResetStreak();
-        //    }
-        //}
 
+        float hitDelay = PlayerPrefs.GetFloat("hitDelay");
+        float noteSpeed = PlayerPrefs.GetFloat("noteSpeed");
 
-        if(!createMode && Input.touchCount>0) {
+        if (!createMode && Input.touchCount>0) {
             for(int i = 0; i < Input.touchCount; i++) {
-                if(Input.GetTouch(i).phase == TouchPhase.Began) {
+                if(Input.GetTouch(i).phase == TouchPhase.Began || Input.GetTouch(i).phase == TouchPhase.Moved) {
+                    
                     //Debug.Log("began");
-                    ray = Camera.main.ScreenPointToRay(Input.GetTouch(i).position);
+                    //make a 2d ray from (x,-1,0) with direction of (0,1,0), then return the position of the first note it hits (or null).
                     //Debug.Log(Input.GetTouch(i).position);
-                    //***** change color
-                    //if (Physics2D.Raycast(ray, out hit, Mathf.Infinity, layerMask)) 
-                    if(hit=Physics2D.GetRayIntersection(ray, Mathf.Infinity, layerMask)){
-                        //Debug.Log("hit");
-                        if (hit.transform.tag=="activator") {
-                            //Debug.Log("activator");
-                            if (hit.collider.gameObject.Equals(gameObject)) {
-                                //Debug.Log("equal");
-                                StartCoroutine(Pressed());
-                                if (active) {
-                                    //Debug.Log(note.gameObject.name);
-                                    Destroy(note);
-                                    AddScore();
-                                    gameManager.GetComponent<GameManager>().AddStreak();
-                                    active = false;
-                                } else {//hit at a bad timing, which leads to resetting combo
-                                    Debug.Log("bad timing");
-                                    gameManager.GetComponent<GameManager>().ResetStreak();
+                    //Debug.Log(Input.GetTouch(i).position.x);
+                    //Debug.Log(gameObject.transform.position.x);
+                    //Vector3 tempPosition = new Vector3(Input.GetTouch(i).position.x, Input.GetTouch(i).position.y, 0);
+                    //Debug.Log(Camera.main.ScreenToWorldPoint(tempPosition));
+                    ray= Camera.main.ScreenPointToRay(Input.GetTouch(i).position);
+                    
+                    if (hit = Physics2D.GetRayIntersection(ray, Mathf.Infinity, layerMask)) {
+                        if (hit.collider.gameObject.Equals(gameObject)) {
+                            
+                            //Debug.Log(ray.origin);
+                            //Debug.Log(ray.direction);
+                            //Debug.Log(hit.transform.position);
+                            StartCoroutine(Pressed());
+                            ray = new Ray(gameObject.transform.position-new Vector3(0,2,0), new Vector3(0, 1, 0));
+                            //hit = Physics2D.GetRayIntersection(ray, Mathf.Infinity, noteLayerMask);
+                            hit = Physics2D.Raycast(ray.origin-new Vector3(0,noteSpeed*hitDelay,1), ray.direction, 4, totalNoteLayerMask);
+                            //Debug.Log(Input.GetTouch(i).position);
+                            //***** change color
+                            if (hit) {
+                                //Debug.Log("hit");
+                                float hitPosition = hit.point.y + hitDelay * noteSpeed;
+                                if (Input.GetTouch(i).phase == TouchPhase.Began) {
+                                    Destroy(hit.collider.gameObject);
+                                    Debug.Log(hitPosition);
+                                    if (hit.transform.tag == "note") {
+                                        AddScore(System.Math.Abs(hitPosition), 0);
+                                    } else if (hit.transform.tag == "slider") {
+                                        AddScore(System.Math.Abs(hitPosition), 1);
+                                    }
+                                } else if (Input.GetTouch(i).phase == TouchPhase.Moved) {
+                                    if (hit.transform.tag == "slider" && System.Math.Abs(hitPosition) < 0.6) {
+                                        Destroy(hit.collider.gameObject);
+                                        Debug.Log(hitPosition);
+                                        AddScore(System.Math.Abs(hitPosition), 1);
+                                    }
                                 }
                             }
                         }
                     }
+
+                    //if (Input.GetTouch(i).position.y < 0.7 && Input.GetTouch(i).position.y > -0.7 && Input.GetTouch(i).position.x < gameObject.transform.position.x+0.5 && Input.GetTouch(i).position.x > gameObject.transform.position.x - 0.5) {
+                    //}
+
                 }
+
+
             }
         }
 
@@ -88,24 +108,33 @@ public class Activator : MonoBehaviour {
     {
         
         
-        if(collider.gameObject.tag=="note")
-        {
-            //Debug.Log("enter" + key.ToString() + " " + collider.name);
-            active = true;
-            note = collider.gameObject;
-        }
-        else if(collider.gameObject.tag == "ending") {
+        //if(collider.gameObject.tag=="note")
+        //{
+        //    //Debug.Log("enter" + key.ToString() + " " + collider.name);
+        //    active = true;
+        //    note = collider.gameObject;
+        //}
+        if(collider.gameObject.tag == "ending") {
             gameManager.GetComponent<GameManager>().GameEnd();
         }
     }
 
     void OnTriggerExit2D(Collider2D collider)
     {
-        active = false;
+        //active = false;
     }
 
-    void AddScore() {
-        PlayerPrefs.SetInt("Score", PlayerPrefs.GetInt("Score") + gameManager.GetComponent<GameManager>().GetScore());//fixed score
+    void AddScore(float hitPosition, int type) {//0 for note, 1 for slider
+        if (type == 0) {
+            PlayerPrefs.SetInt("Score", PlayerPrefs.GetInt("Score") + gameManager.GetComponent<GameManager>().GetScore(hitPosition));
+            gameManager.GetComponent<GameManager>().AddStat(3 - (int)(hitPosition / 0.3));
+        } else {
+            PlayerPrefs.SetInt("Score", PlayerPrefs.GetInt("Score") + gameManager.GetComponent<GameManager>().GetScore(0));
+            gameManager.GetComponent<GameManager>().AddStat(3);
+        }
+        
+        
+        gameManager.GetComponent<GameManager>().AddStreak();
     }
 
 

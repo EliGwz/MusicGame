@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class GameManager : MonoBehaviour {
 
     int basicScore = 100;
@@ -12,7 +13,13 @@ public class GameManager : MonoBehaviour {
 	void Start () {
         PlayerPrefs.SetInt("Score", 0);
         PlayerPrefs.SetInt("HP", 25);
+        PlayerPrefs.SetInt("Multiplier", multiplier);
         PlayerPrefs.SetInt("Streak", 0);
+        PlayerPrefs.SetInt("Perfect", 0);
+        PlayerPrefs.SetInt("Great", 0);
+        PlayerPrefs.SetInt("Good", 0);
+        PlayerPrefs.SetInt("Miss", 0);
+        SonicBloom.Koreo.Koreographer.Instance.EventDelayInSeconds=0.3f;
     }
 	
 	// Update is called once per frame
@@ -22,7 +29,8 @@ public class GameManager : MonoBehaviour {
 
     void OnTriggerEnter2D(Collider2D collider) {
         Destroy(collider.gameObject);
-        Debug.Log("missed");//currently not working
+        Debug.Log("missed");
+        AddStat(0);
         ResetStreak();
     }
 
@@ -33,6 +41,12 @@ public class GameManager : MonoBehaviour {
         multiplier = (streak / 10) + 1;
         PlayerPrefs.SetInt("Multiplier", multiplier);
         //UpdateGUI();
+    }
+
+    public void AddStat(int stat) {//add statistics for a play. 0-3 means Miss, Good, Great and Perfect respectively.
+        string[] stats = { "Miss", "Good", "Great", "Perfect" };
+        int temp = PlayerPrefs.GetInt(stats[stat]) + 1;
+        PlayerPrefs.SetInt(stats[stat], temp);
     }
 
     public void ResetStreak() {
@@ -49,8 +63,20 @@ public class GameManager : MonoBehaviour {
     //    PlayerPrefs.SetInt("Multiplier", multiplier);
     //}
 
-    public int GetScore() {
-        return basicScore * multiplier;
+    public int GetScore(float hitPosition) {
+        int accuracy;
+        switch ((int)(hitPosition/0.3)) {
+            case 0:
+                accuracy = 10;
+                break;
+            case 1:
+                accuracy = 7;
+                break;
+            default:
+                accuracy = 4;
+                break;
+        }
+        return basicScore * multiplier * accuracy / 10;
     }
 
     public void GameEnd() {//successfully ended a song
@@ -60,4 +86,6 @@ public class GameManager : MonoBehaviour {
     public void Failed() {//failed to complete a song
 
     }
+
+
 }

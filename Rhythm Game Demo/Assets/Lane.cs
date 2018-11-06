@@ -102,9 +102,9 @@ namespace Msccs.Game.Demos {
 
         void Update() {
             // Clear out invalid entries.
-            while (trackedNotes.Count > 0 && trackedNotes.Peek().IsNoteMissed()) {
-                trackedNotes.Dequeue();
-            }
+            //while (trackedNotes.Count > 0 && trackedNotes.Peek().IsNoteMissed()) {
+            //    trackedNotes.Dequeue();
+            //}
 
             // Check for new spawns.
             CheckSpawnNext();
@@ -165,7 +165,7 @@ namespace Msccs.Game.Demos {
                    laneEvents[pendingEventIdx].StartSample < currentTime + samplesToTarget) {
                 KoreographyEvent evt = laneEvents[pendingEventIdx];
 
-                Note newObj = gameController.GetFreshNoteObject();
+                Note newObj = gameController.GetFreshNoteObject(evt);
                 newObj.Initialize(evt, color, this, gameController);
 
                 trackedNotes.Enqueue(newObj);

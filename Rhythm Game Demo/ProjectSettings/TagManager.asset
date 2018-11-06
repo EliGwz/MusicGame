@@ -8,6 +8,7 @@ TagManager:
   - activator
   - ending
   - lane
+  - slider
   layers:
   - Default
   - TransparentFX
@@ -20,7 +21,7 @@ TagManager:
   - PostProcessing
   - Note
   - Activator
-  - 
+  - Slider
   - 
   - 
   - 

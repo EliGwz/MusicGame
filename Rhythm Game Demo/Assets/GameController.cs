@@ -16,10 +16,13 @@ namespace Msccs.Game.Demos {
         public float hitWindowRangeInMS = 80;
 
         [Tooltip("The number of units traversed per second by Note Objects.")]
-        public float noteSpeed = 3f;
+        public float noteSpeed = 6f;
 
         [Tooltip("The archetype (blueprints) to use for generating notes.  Can be a prefab.")]
         public Note noteObjectArchetype;
+
+        [Tooltip("The archetype (blueprints) to use for generating slider notes.  Can be a prefab.")]
+        public Note sliderNoteObjectArchetype;
 
         [Tooltip("The list of Lane Controller objects that represent a lane for an event to travel down.")]
         public List<Lane> noteLanes = new List<Lane>();
@@ -29,6 +32,11 @@ namespace Msccs.Game.Demos {
 
         [Tooltip("The Audio Source through which the Koreographed audio will be played.  Be sure to disable 'Auto Play On Awake' in the Music Player.")]
         public AudioSource audioCom;
+
+        [Tooltip("The offset to handle the delay between user tap and ray hit")]
+        public float hitDelay;
+
+
 
         // The amount of leadInTime left before the audio is audible.
         float leadInTimeLeft;
@@ -82,14 +90,18 @@ namespace Msccs.Game.Demos {
         #region Methods
 
         void Start() {
-            Koreographer.Instance.EventDelayInSeconds = 0.05f;
+
+            PlayerPrefs.SetFloat("noteSpeed", noteSpeed);
+            PlayerPrefs.SetFloat("hitDelay", hitDelay);
+
+            Koreographer.Instance.EventDelayInSeconds = 0f;
             InitializeLeadIn();
 
             // Initialize all the Lanes.
             for (int i = 0; i < noteLanes.Count; ++i) {
                 noteLanes[i].Initialize(this);
             }
-            Debug.Log(noteLanes.Count);//6
+            //Debug.Log(noteLanes.Count);//8
 
             // Initialize events.
             playingKoreo = Koreographer.Instance.GetKoreographyAtIndex(0);
@@ -160,14 +172,20 @@ namespace Msccs.Game.Demos {
         }
 
         // Retrieves a frehsly activated Note Object from the pool.
-        public Note GetFreshNoteObject() {
-            Note retObj;
+        public Note GetFreshNoteObject(KoreographyEvent evt) {
 
-            if (noteObjectPool.Count > 0) {
-                retObj = noteObjectPool.Pop();
+            Note retObj;
+            string payload = evt.GetTextValue();
+            if (payload.Contains("s")) {
+                retObj = GameObject.Instantiate<Note>(sliderNoteObjectArchetype);
             } else {
                 retObj = GameObject.Instantiate<Note>(noteObjectArchetype);
             }
+            //if (noteObjectPool.Count > 0) {
+            //    retObj = noteObjectPool.Pop();
+            //} else {
+            //    retObj = GameObject.Instantiate<Note>(noteObjectArchetype);
+            //}
 
             retObj.gameObject.SetActive(true);
             retObj.enabled = true;

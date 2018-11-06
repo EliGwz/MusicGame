@@ -115,14 +115,13 @@ namespace SonicBloom.Koreo.Demos
 
 		void Update()
 		{
-			// Clear out invalid entries.
-			while (trackedNotes.Count > 0 && trackedNotes.Peek().IsNoteMissed())
-			{
-				trackedNotes.Dequeue();
-			}
+            //Clear out invalid entries.
+            //while (trackedNotes.Count > 0 && trackedNotes.Peek().IsNoteMissed()) {
+            //    trackedNotes.Dequeue();
+            //}
 
-			// Check for new spawns.
-			CheckSpawnNext();
+            // Check for new spawns.
+            CheckSpawnNext();
 
 			// Check for input.  Note that touch controls are handled by the Event System, which is all
 			//  configured within the Inspector on the buttons themselves, using the same functions as
