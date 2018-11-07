@@ -9,6 +9,12 @@ public class Scores : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-        GetComponent<Text>().text = PlayerPrefs.GetInt(textName) + "";
+        if (textName != "Volume") {
+            GetComponent<Text>().text = PlayerPrefs.GetInt(textName) + "";
+        } else {
+            GetComponent<Text>().text = PlayerPrefs.GetFloat (textName) + "";
+        }
+
+        
 	}
 }

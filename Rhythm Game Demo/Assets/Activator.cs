@@ -17,11 +17,14 @@ public class Activator : MonoBehaviour {
     public GameObject cloneNote;//for creating maps
 
     Ray ray;//for tapping
+    Ray voiceRay;
     RaycastHit2D hit;
     int layerMask = 1 << 10;//only accept activator layer, which number is 10.
     int noteLayerMask = 1 << 9;//note layer
     int slideLayerMask = 1 << 11;//slider layer
     int totalNoteLayerMask = 5 << 9;//note and slider
+    int endingLayerMask = 1 << 12;//ending note layer
+    int voiceLayerMask = 1 << 13;//voice note layer
 
 	void Awake () {
         
@@ -38,8 +41,21 @@ public class Activator : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-        float hitDelay = PlayerPrefs.GetFloat("hitDelay");
+        float hitDelay = PlayerPrefs.GetFloat("hitDelay");//these should be set before entering the game play scene
         float noteSpeed = PlayerPrefs.GetFloat("noteSpeed");
+
+        if (gameObject.name == "Activator" && GameManager.volume > GameManager.volumeThreshold) {//only one activator works on this
+            voiceRay = new Ray(gameObject.transform.position - new Vector3(0, 2, 0), new Vector3(0, 1, 0));
+            //hit = Physics2D.GetRayIntersection(voiceRay, Mathf.Infinity, noteLayerMask);
+            hit = Physics2D.Raycast(voiceRay.origin - new Vector3(0, noteSpeed * hitDelay, 1), voiceRay.direction, 4, voiceLayerMask);
+            if (hit) {
+                //Debug.Log("hit");
+                float hitPosition = hit.point.y + hitDelay * noteSpeed;
+                Destroy(hit.collider.gameObject);
+                Debug.Log(hitPosition);
+                AddScore(System.Math.Abs(hitPosition), 2);
+            }
+        }
 
         if (!createMode && Input.touchCount>0) {
             for(int i = 0; i < Input.touchCount; i++) {
@@ -124,13 +140,17 @@ public class Activator : MonoBehaviour {
         //active = false;
     }
 
-    void AddScore(float hitPosition, int type) {//0 for note, 1 for slider
-        if (type == 0) {
+    void AddScore(float hitPosition, int type) {//0 for note, 1 for slider, 2 for voice
+        if (type == 0 && type == 2) {
             PlayerPrefs.SetInt("Score", PlayerPrefs.GetInt("Score") + gameManager.GetComponent<GameManager>().GetScore(hitPosition));
-            gameManager.GetComponent<GameManager>().AddStat(3 - (int)(hitPosition / 0.3));
+            if((int)(hitPosition / 0.3) > 2) {
+                gameManager.GetComponent<GameManager>().AddStat(5 - (int)(hitPosition / 0.3));
+            } else {
+                gameManager.GetComponent<GameManager>().AddStat(4 - (int)(hitPosition / 0.3));
+            }
         } else {
             PlayerPrefs.SetInt("Score", PlayerPrefs.GetInt("Score") + gameManager.GetComponent<GameManager>().GetScore(0));
-            gameManager.GetComponent<GameManager>().AddStat(3);
+            gameManager.GetComponent<GameManager>().AddStat(4);
         }
         
         

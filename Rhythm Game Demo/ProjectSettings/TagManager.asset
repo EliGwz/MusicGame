@@ -9,6 +9,7 @@ TagManager:
   - ending
   - lane
   - slider
+  - voice
   layers:
   - Default
   - TransparentFX
@@ -22,8 +23,8 @@ TagManager:
   - Note
   - Activator
   - Slider
-  - 
-  - 
+  - Ending
+  - Voice
   - 
   - 
   - 
