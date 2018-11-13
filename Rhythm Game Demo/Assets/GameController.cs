@@ -24,6 +24,12 @@ namespace Msccs.Game.Demos {
         [Tooltip("The archetype (blueprints) to use for generating slider notes.  Can be a prefab.")]
         public Note sliderNoteObjectArchetype;
 
+        [Tooltip("The archetype (blueprints) to use for generating end note.  Can be a prefab.")]
+        public Note endNoteObjectArchetype;
+
+        [Tooltip("The archetype (blueprints) to use for generating voice note.  Can be a prefab.")]
+        public Note voiceNoteObjectArchetype;
+
         [Tooltip("The list of Lane Controller objects that represent a lane for an event to travel down.")]
         public List<Lane> noteLanes = new List<Lane>();
 
@@ -101,7 +107,7 @@ namespace Msccs.Game.Demos {
             for (int i = 0; i < noteLanes.Count; ++i) {
                 noteLanes[i].Initialize(this);
             }
-            //Debug.Log(noteLanes.Count);//8
+            //Debug.Log(noteLanes.Count);//9
 
             // Initialize events.
             playingKoreo = Koreographer.Instance.GetKoreographyAtIndex(0);
@@ -178,6 +184,10 @@ namespace Msccs.Game.Demos {
             string payload = evt.GetTextValue();
             if (payload.Contains("s")) {
                 retObj = GameObject.Instantiate<Note>(sliderNoteObjectArchetype);
+            } else if (payload.Contains("e")) {
+                retObj = GameObject.Instantiate<Note>(endNoteObjectArchetype);
+            } else if (payload.Contains("v")) {
+                retObj = GameObject.Instantiate<Note>(voiceNoteObjectArchetype);
             } else {
                 retObj = GameObject.Instantiate<Note>(noteObjectArchetype);
             }

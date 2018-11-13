@@ -1,8 +1,9 @@
 Android
 PlayerPath?
-C:/Users/hfef7ui2/OneDrive - The Hong Kong Polytechnic University/Documents/Unity Project/Rhythm Game Demo/gamedemo_6.apk
+C:/Users/hfef7ui2/OneDrive - The Hong Kong Polytechnic University/Documents/Unity Project/Rhythm Game Demo/gamedemo_7.apk
 SceneListBegin?
 Assets/Scenes/SampleScene.unity
+Assets/Scenes/Score.unity
 SceneListEnd?
 c422dd62785a6d0afa870fbd111886ce Unity.TextMeshPro.dll:TMPro.TMP_SelectionCaret
 7b803eb2910e9b4cd5e521ae07b9f7d6 Unity.TextMeshPro.dll:TMPro.TMP_Dropdown
@@ -127,7 +128,7 @@ fc061f3ae8a876c0687e86378d4a447c UnityEngine.Networking.dll:UnityEngine.Networki
 7ca56e063bd071986fff4f513cc4f477 UnityEngine.Networking.dll:UnityEngine.Networking.NetworkTransformVisualizer
 c13cb9370bb2688817035276c860bf52 Assembly-CSharp.dll:SonicBloom.Koreo.Demos.NoteObject
 f8ebba6567acee58f3677332251afc95 Assembly-CSharp.dll:SonicBloom.Koreo.Demos.DemoPitchDisplayUI
-c867e22992ea3594fcccff166c65c871 Assembly-CSharp.dll:Msccs.Game.Demos.GameController
+8618423fc3dd526832fcdcf769e814a6 Assembly-CSharp.dll:Msccs.Game.Demos.GameController
 0a006f3734181ba8b26758f0866152c0 UnityEngine.SpatialTracking.dll:UnityEngine.SpatialTracking.TrackedPoseDriver
 07ed01f649019292a9850f43035e19f8 Assembly-CSharp.dll:SonicBloom.Koreo.Demos.ButtonController
 382b8ef512fa8d6108723a01b57af65b UnityEngine.Analytics.dll:UnityEngine.Analytics.AnalyticsEventTracker
@@ -249,7 +250,7 @@ dfd33ff9ae3ce8d7ca1f22b475ec2387 UnityEngine.HoloLens.dll:UnityEngine.XR.WSA.Spa
 aac9c55ae7ba4b95b852a7d9c191acd1 Unity.TextMeshPro.dll:TMPro.TextMeshProUGUI
 dab813f6e20a0fa47fd9af63493d461f Assembly-CSharp.dll:SonicBloom.Koreo.Demos.ColorAdjuster
 0a006f3734181ba8b26758f0866152c0 UnityEngine.SpatialTracking.dll:UnityEngine.SpatialTracking.TrackedPoseDriver
-486cd95c82d8305219c352c06b776e1f Assembly-CSharp.dll:.GameManager
+78913d44238b970e2410b50b1ddab8ab Assembly-CSharp.dll:.GameManager
 486cd95c82d8305219c352c06b776e1f SonicBloom.Koreo.dll:SonicBloom.Koreo.Players.AudioBus
 0ed29b6b8ee4a02a1eae82b82b843872 SonicBloom.Koreo.dll:SonicBloom.Koreo.Players.AudioSourceVisor
 ce01cabe710f500f5cbb7eb133d72de3 SonicBloom.Koreo.dll:SonicBloom.Koreo.Koreographer
