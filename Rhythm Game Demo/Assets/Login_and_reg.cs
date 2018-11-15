@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class Login_and_reg : MonoBehaviour {
@@ -9,10 +11,15 @@ public class Login_and_reg : MonoBehaviour {
     public Text ShowText;
     private string Url = "https://i.cs.hku.hk/~wzgao/Login_and_reg.php";
     bool action;
+    private GameObject Login_btn, Reg_btn;
 
     // Use this for initialization
     void Start () {
-		
+        Login_btn = GameObject.Find("Button_Login");
+        Reg_btn = GameObject.Find("Button_Reg");
+
+        Login_btn.GetComponent<Button>().onClick.AddListener(Button_Login);
+        Reg_btn.GetComponent<Button>().onClick.AddListener(Button_Reg);
 	}
 	
 	// Update is called once per frame
@@ -22,12 +29,14 @@ public class Login_and_reg : MonoBehaviour {
 
     public void Button_Login()
     {
+        ShowText.text = "login";
         action = true;
         CreateMainForm(ID.text, Pwd.text, action);
     }
 
     public void Button_Reg()
     {
+        ShowText.text = "reg";
         action = false;
         CreateMainForm(ID.text, Pwd.text, action);
     }
@@ -35,7 +44,7 @@ public class Login_and_reg : MonoBehaviour {
     public void CreateMainForm(string id, string pwd, bool action)
     {
         WWWForm form = new WWWForm();
-        form.AddField("usr", name);
+        form.AddField("usr", id);
         form.AddField("pwd", pwd);
         if (action == true)
         {
@@ -65,29 +74,28 @@ public class Login_and_reg : MonoBehaviour {
                 if (www.text == "success")
                 {
                     ShowText.text = "Congratulations! ";
-                }  else if (www.text == "exist")
-                {
-                    ShowText.text = "Sorry, this name has been occupied!";
+
+                    SceneManager.LoadScene(1);
                 }
+                else if (www.text == "exist")
+                {
+                    ShowText.text = "Sorry, this name has been occupied! Please Try Again!";
+                }
+                else ShowText.text = www.text;
             }
             else                                                //Login
             {
                 if (www.text == "success")
                 {
                     ShowText.text = "Login Successful!";
+                    
+                    SceneManager.LoadScene(1); 
                 }
                 else if (www.text == "fail")
                 {
                     ShowText.text = "Your id or password is incorrect! Please Try Again!";
                 }
             }
-
-            Invoke("ShowTextNull", 1);
         }
-    }
-
-    void ShowTextNull()
-    {
-        ShowText.text = "";
     }
 }
