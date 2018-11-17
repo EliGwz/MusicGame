@@ -1,4 +1,4 @@
-*.DS_Store
+.DS_Store
 
-Rhythm Game Demo/Library/metadata/*
-Rhythm Game Demo/Library/ShaderCache/*
+metadata/
+ShaderCache/
