@@ -82,6 +82,7 @@
     <Compile Include="Assets\Login_and_reg.cs" />
     <Compile Include="Assets\MusicManager.cs" />
     <Compile Include="Assets\Note.cs" />
+    <Compile Include="Assets\SceneLoader.cs" />
     <Compile Include="Assets\Scores.cs" />
     <None Include="Assets\Koreographer\ReadMe.txt" />
     <Reference Include="UnityEditor.StandardEvents">
