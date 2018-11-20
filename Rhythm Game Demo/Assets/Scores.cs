@@ -12,7 +12,7 @@ public class Scores : MonoBehaviour {
         if (textName != "Volume") {
             GetComponent<Text>().text = PlayerPrefs.GetInt(textName) + "";
         } else {
-            GetComponent<Text>().text = PlayerPrefs.GetFloat (textName) + "";
+            GetComponent<Text>().text = PlayerPrefs.GetFloat (textName).ToString("F2") + "";
         }
 
         

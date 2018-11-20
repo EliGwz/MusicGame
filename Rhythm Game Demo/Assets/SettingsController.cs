@@ -40,6 +40,9 @@ public class SettingsController : MonoBehaviour {
         noteDisplayOffset.text = noteDisplay.ToString("F2") + "";
         hitOffset.text = hit.ToString("F2") + "";
         volumeThreshold.text = volume.ToString("F2") + "";
+        PlayerPrefs.SetFloat("NoteDisplayOffset", noteDisplay);
+        PlayerPrefs.SetFloat("hitDelay", hit);
+        PlayerPrefs.SetFloat("VolumeThreshold", volume);
     }
 
     public void DecreaseNoteDisplayOffset() {

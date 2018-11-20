@@ -12,8 +12,10 @@ public class SongSelectionController : MonoBehaviour {
     public Text length;
     public Text bpm;
     public Text songName;
+    public Text noteSpeed;
     public int songIndex;
     public AudioSource songDemo;
+    float speed;
     Color easyColor = new Color(0.3f, 1f, 0f);
     Color hardColor = new Color(1f, 0.5f, 0.3f);
 
@@ -22,6 +24,9 @@ public class SongSelectionController : MonoBehaviour {
         //GameStatics.Song bladeDance = new GameStatics.Song("Blade Dance", "187", "01:30", "Resources/SongImages/BladeDance.png");
         songIndex = PlayerPrefs.GetInt("SongIndex", 0);
         difficulty.text = PlayerPrefs.GetString("Difficulty", "Easy");
+        speed = PlayerPrefs.GetFloat("noteSpeed", 6f);
+        noteSpeed.text = speed.ToString("F1") + "";
+
         PlayerPrefs.SetString("Difficulty", difficulty.text);
         if (difficulty.text == "Easy") {
             difficultyButton.color = easyColor;
@@ -61,6 +66,24 @@ public class SongSelectionController : MonoBehaviour {
         LoadSongInfo(songIndex);
     }
 
+    public void IncreaseNoteSpeed() {
+        speed += 0.5f;
+        if (speed > 10) {
+            speed = 10f;
+        }
+        PlayerPrefs.SetFloat("noteSpeed", speed);
+        noteSpeed.text = speed.ToString("F1") + "";
+    }
+
+    public void DecreaseNoteSpeed() {
+        speed -= 0.5f;
+        if (speed < 1) {
+            speed = 1f;
+        }
+        PlayerPrefs.SetFloat("noteSpeed", speed);
+        noteSpeed.text = speed.ToString("F1") + "";
+    }
+
     void LoadSongInfo(int songIndex) {
         bpm.text = GameStatics.songs[songIndex].Bpm;
         length.text = GameStatics.songs[songIndex].Length;
@@ -73,6 +96,7 @@ public class SongSelectionController : MonoBehaviour {
     }
 
     public void Play() {
+        PlayerPrefs.SetString("PlayMode", "Play");
         UnityEngine.SceneManagement.SceneManager.LoadScene(4);
     }
 

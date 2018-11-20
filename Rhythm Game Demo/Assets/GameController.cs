@@ -50,6 +50,8 @@ namespace Msccs.Game.Demos {
 
         public Button pauseButton;
 
+        GameObject gameManager;
+
 
         // The amount of leadInTime left before the audio is audible.
         float leadInTimeLeft;
@@ -106,9 +108,12 @@ namespace Msccs.Game.Demos {
         #region Methods
 
         void Start() {
-
-            PlayerPrefs.SetFloat("noteSpeed", noteSpeed);
-            PlayerPrefs.SetFloat("hitDelay", hitDelay);
+            gameManager = GameObject.Find("GameManager");
+            //PlayerPrefs.SetFloat("noteSpeed", noteSpeed);
+            //PlayerPrefs.SetFloat("hitDelay", hitDelay);
+            noteSpeed = PlayerPrefs.GetFloat("noteSpeed", 6f);
+            hitDelay = PlayerPrefs.GetFloat("hitDelay", 0.08f);
+            gameManager.transform.position = new Vector3(0, (float)(-noteSpeed * hitDelay - (2 + 0.5) * noteSpeed / 6), 0);//holy shit
             string songName;
             if(PlayerPrefs.GetString("PlayMode", "Play") == "Play") {
                 songName = PlayerPrefs.GetString("SongName", GameStatics.songs[0].PlayBackName);
@@ -117,6 +122,7 @@ namespace Msccs.Game.Demos {
                 songName = GameStatics.testSong.PlayBackName;
                 eventID = "Easy";
             }
+
             simpleMusicPlayer = GameObject.Find(songName).GetComponent<SimpleMusicPlayer>();
             audioCom = GameObject.Find(songName).GetComponent<AudioSource>();
             Koreographer.Instance.EventDelayInSeconds = 0f;

@@ -94,7 +94,7 @@ public class Activator : MonoBehaviour {
                                         AddScore(System.Math.Abs(hitPosition), 1);
                                     }
                                 } else if (Input.GetTouch(i).phase == TouchPhase.Moved) {
-                                    if (hit.transform.tag == "slider" && System.Math.Abs(hitPosition) < 0.6/noteSpeed*6) {
+                                    if (hit.transform.tag == "slider" && System.Math.Abs(hitPosition) < 0.3*2/noteSpeed*6) {
                                         Destroy(hit.collider.gameObject);
                                         Debug.Log(hitPosition);
                                         AddScore(System.Math.Abs(hitPosition), 1);

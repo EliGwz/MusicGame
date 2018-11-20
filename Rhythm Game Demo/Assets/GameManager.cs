@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour {
 
@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour {
     public float volume0;
     public static float volumeThreshold;//the minimum volume to hit voice notes
     AudioClip micRecord;
+    public Text hitText;
 
 	// Use this for initialization
 	void Start () {
@@ -32,6 +33,7 @@ public class GameManager : MonoBehaviour {
         volumeThreshold = PlayerPrefs.GetFloat("VolumeThreshold", 0.3f);
         device = Microphone.devices[0];
         micRecord = Microphone.Start(device, true, 300, 44100);
+
     }
 	
 	// Update is called once per frame
@@ -75,13 +77,17 @@ public class GameManager : MonoBehaviour {
         }
         multiplier = (streak / 10) + 1;
         PlayerPrefs.SetInt("Multiplier", multiplier);
+        //if (streak == 10) {
+
+        //}
         //UpdateGUI();
     }
 
-    public void AddStat(int stat) {//add statistics for a play. 0-3 means Miss, Good, Great and Perfect respectively.
+    public void AddStat(int stat) {//add statistics for a play. 0-4 means Miss, Bad, Good, Great and Perfect respectively.
         string[] stats = { "Miss", "Bad", "Good", "Great", "Perfect" };
         int temp = PlayerPrefs.GetInt(stats[stat]) + 1;
         PlayerPrefs.SetInt(stats[stat], temp);
+        hitText.text = stats[stat];
     }
 
     public void ResetStreak() {
