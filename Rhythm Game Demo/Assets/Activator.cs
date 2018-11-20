@@ -45,9 +45,9 @@ public class Activator : MonoBehaviour {
         float noteSpeed = PlayerPrefs.GetFloat("noteSpeed");
 
         if (gameObject.name == "Activator" && GameManager.volume > GameManager.volumeThreshold) {//only one activator works on this
-            voiceRay = new Ray(gameObject.transform.position - new Vector3(0, 2, 0), new Vector3(0, 1, 0));
+            voiceRay = new Ray(gameObject.transform.position - new Vector3(0, 2f * noteSpeed / 6, 0), new Vector3(0, 1, 0));//range of ray start: [-10/3,-1/3]
             //hit = Physics2D.GetRayIntersection(voiceRay, Mathf.Infinity, noteLayerMask);
-            hit = Physics2D.Raycast(voiceRay.origin - new Vector3(0, noteSpeed * hitDelay, 1), voiceRay.direction, 4, voiceLayerMask);
+            hit = Physics2D.Raycast(voiceRay.origin - new Vector3(0, noteSpeed * hitDelay, 1), voiceRay.direction, 4f*noteSpeed/6f, voiceLayerMask);
             if (hit) {
                 //Debug.Log("hit");
                 float hitPosition = hit.point.y + hitDelay * noteSpeed;
@@ -77,9 +77,9 @@ public class Activator : MonoBehaviour {
                             //Debug.Log(ray.direction);
                             //Debug.Log(hit.transform.position);
                             StartCoroutine(Pressed());
-                            ray = new Ray(gameObject.transform.position-new Vector3(0,2,0), new Vector3(0, 1, 0));
+                            ray = new Ray(gameObject.transform.position-new Vector3(0, 2f * noteSpeed / 6, 0), new Vector3(0, 1, 0));
                             //hit = Physics2D.GetRayIntersection(ray, Mathf.Infinity, noteLayerMask);
-                            hit = Physics2D.Raycast(ray.origin-new Vector3(0,noteSpeed*hitDelay,1), ray.direction, 4, totalNoteLayerMask);
+                            hit = Physics2D.Raycast(ray.origin-new Vector3(0,noteSpeed*hitDelay,1), ray.direction, 4f*noteSpeed/6f, totalNoteLayerMask);
                             //Debug.Log(Input.GetTouch(i).position);
                             //***** change color
                             if (hit) {
@@ -94,7 +94,7 @@ public class Activator : MonoBehaviour {
                                         AddScore(System.Math.Abs(hitPosition), 1);
                                     }
                                 } else if (Input.GetTouch(i).phase == TouchPhase.Moved) {
-                                    if (hit.transform.tag == "slider" && System.Math.Abs(hitPosition) < 0.6) {
+                                    if (hit.transform.tag == "slider" && System.Math.Abs(hitPosition) < 0.6/noteSpeed*6) {
                                         Destroy(hit.collider.gameObject);
                                         Debug.Log(hitPosition);
                                         AddScore(System.Math.Abs(hitPosition), 1);
@@ -141,12 +141,13 @@ public class Activator : MonoBehaviour {
     }
 
     void AddScore(float hitPosition, int type) {//0 for note, 1 for slider, 2 for voice
+        float speedParameter = PlayerPrefs.GetFloat("noteSpeed") / 6;
         if (type == 0 && type == 2) {
             PlayerPrefs.SetInt("Score", PlayerPrefs.GetInt("Score") + gameManager.GetComponent<GameManager>().GetScore(hitPosition));
-            if((int)(hitPosition / 0.3) > 2) {
-                gameManager.GetComponent<GameManager>().AddStat(5 - (int)(hitPosition / 0.3));
+            if((int)(hitPosition / 0.3 /speedParameter) > 2) {
+                gameManager.GetComponent<GameManager>().AddStat(5 - (int)(hitPosition / 0.3 / speedParameter));
             } else {
-                gameManager.GetComponent<GameManager>().AddStat(4 - (int)(hitPosition / 0.3));
+                gameManager.GetComponent<GameManager>().AddStat(4 - (int)(hitPosition / 0.3 / speedParameter));
             }
         } else {
             PlayerPrefs.SetInt("Score", PlayerPrefs.GetInt("Score") + gameManager.GetComponent<GameManager>().GetScore(0));

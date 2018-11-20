@@ -8,10 +8,11 @@ public class GameManager : MonoBehaviour {
     int basicScore = 100;
     int multiplier = 1;
     int streak = 0;//combo
+    int maxCombo = 0;
     string device;
     public static float volume;
     public float volume0;
-    public static float volumeThreshold = 0.01f;//the minimum volume to hit voice notes
+    public static float volumeThreshold;//the minimum volume to hit voice notes
     AudioClip micRecord;
 
 	// Use this for initialization
@@ -25,8 +26,10 @@ public class GameManager : MonoBehaviour {
         PlayerPrefs.SetInt("Good", 0);
         PlayerPrefs.SetInt("Bad", 0);
         PlayerPrefs.SetInt("Miss", 0);
+        PlayerPrefs.SetInt("MaxCombo", 0);
         PlayerPrefs.SetFloat("Volume", 0f);
-        SonicBloom.Koreo.Koreographer.Instance.EventDelayInSeconds=0.3f;
+        SonicBloom.Koreo.Koreographer.Instance.EventDelayInSeconds=PlayerPrefs.GetFloat("NoteDisplayOffset",0.3f);
+        volumeThreshold = PlayerPrefs.GetFloat("VolumeThreshold", 0.3f);
         device = Microphone.devices[0];
         micRecord = Microphone.Start(device, true, 300, 44100);
     }
@@ -35,7 +38,7 @@ public class GameManager : MonoBehaviour {
 	void Update () {
         volume = GetVolume();
         volume0 = volume;
-        PlayerPrefs.SetFloat("Volume", volume*1000);
+        PlayerPrefs.SetFloat("Volume", volume*1);
     }
 
     float GetVolume() {
@@ -67,6 +70,9 @@ public class GameManager : MonoBehaviour {
         PlayerPrefs.SetInt("HP", PlayerPrefs.GetInt("HP") + 1 <=100? PlayerPrefs.GetInt("HP") + 1:100);
         streak = PlayerPrefs.GetInt("Streak") + 1;
         PlayerPrefs.SetInt("Streak", streak);
+        if (streak > maxCombo) {
+            maxCombo = streak;
+        }
         multiplier = (streak / 10) + 1;
         PlayerPrefs.SetInt("Multiplier", multiplier);
         //UpdateGUI();
@@ -94,7 +100,7 @@ public class GameManager : MonoBehaviour {
 
     public int GetScore(float hitPosition) {
         int accuracy;
-        switch ((int)(hitPosition/0.3)) {
+        switch ((int)(hitPosition/0.3/PlayerPrefs.GetFloat("noteSpeed")*6)) {
             case 0:
                 accuracy = 10;
                 break;
@@ -115,7 +121,8 @@ public class GameManager : MonoBehaviour {
 
     public void GameEnd() {//successfully ended a song
         Debug.Log("end");
-        UnityEngine.SceneManagement.SceneManager.LoadScene(1);
+        PlayerPrefs.SetInt("MaxCombo", maxCombo);
+        UnityEngine.SceneManagement.SceneManager.LoadScene(5);
     }
 
     public void Failed() {//failed to complete a song
