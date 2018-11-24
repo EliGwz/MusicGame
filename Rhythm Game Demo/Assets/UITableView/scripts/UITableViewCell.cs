@@ -4,54 +4,54 @@ using UnityEngine.UI;
 
 public class UITableViewCell : MonoBehaviour
 {
-	public Text title;
-	public Text author;
-	public Text readed;
+	public Text rank;
+	public Text userid;
+	public Text score;
 	public Image icon;
 	public Image line;
 
-	private string bookTitle;
+	private string userRank;
 
-	public string BookTitle
+	public string UserRank
 	{
 		set
 		{
-			bookTitle = value;
-			title.text = bookTitle;
+			userRank = value;
+			rank.text = userRank;
 		}
 	}
 
-	private string bookAuthor;
+	private string userName;
 
-	public string BookAuthor
+	public string UserName
 	{
 		set
 		{
-			bookAuthor = value;
-			author.text = bookAuthor;
-		}
-	}
-
-
-	private string bookCategory;
-
-	public string BookCategory
-	{
-		set
-		{
-			bookCategory = value;
+			userName = value;
+			userid.text = userName;
 		}
 	}
 
 
-	private int pageReaded;
+	//private string bookCategory;
 
-	public int PageReaded
+	//public string BookCategory
+	//{
+	//	set
+	//	{
+	//		bookCategory = value;
+	//	}
+	//}
+
+
+	private int userScore;
+
+	public int UserScore
 	{
 		set
 		{
-			pageReaded = value;
-			readed.text = pageReaded.ToString();
+			userScore = value;
+			score.text = userScore.ToString();
 		}
 	}
 
@@ -67,10 +67,10 @@ public class UITableViewCell : MonoBehaviour
 
 	}
 
-	public void Read_Action()
-	{
-		print("Click " + bookTitle);
-	}
+	//public void Read_Action()
+	//{
+	//	print("Click " + userRank);
+	//}
 
 	public void SetIcon(Sprite ico)
 	{
