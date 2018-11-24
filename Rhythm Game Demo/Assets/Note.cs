@@ -55,10 +55,10 @@ public class Note : MonoBehaviour {
 
         UpdatePosition();
 
-        if (transform.position.y <= laneController.DespawnY) {
-            gameController.ReturnNoteObjectToPool(this);
-            Reset();
-        }
+        //if (transform.position.y <= laneController.DespawnY) {
+        //    gameController.ReturnNoteObjectToPool(this);
+        //    Reset();
+        //}
     }
 
     // Updates the height of the Note Object.  This is relative to the speed at which the notes fall and 

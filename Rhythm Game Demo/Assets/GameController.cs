@@ -1,6 +1,10 @@
 ﻿using UnityEngine;
+using System.Collections;
 using System.Collections.Generic;
 using SonicBloom.Koreo;
+using SonicBloom.Koreo.Players;
+using System.Threading;
+using UnityEngine.UI;
 
 namespace Msccs.Game.Demos {
     //[AddComponentMenu("Koreographer/Demos/Rhythm Game/Rhythm Game Controller")]
@@ -42,6 +46,11 @@ namespace Msccs.Game.Demos {
         [Tooltip("The offset to handle the delay between user tap and ray hit")]
         public float hitDelay;
 
+        public Canvas pauseCanvas;
+
+        public Button pauseButton;
+
+        GameObject gameManager;
 
 
         // The amount of leadInTime left before the audio is audible.
@@ -52,6 +61,9 @@ namespace Msccs.Game.Demos {
 
         // Local cache of the Koreography loaded into the Koreographer component.
         Koreography playingKoreo;
+
+        // Music Playback
+        public SimpleMusicPlayer simpleMusicPlayer;
 
         // Koreographer works in samples.  Convert the user-facing values into sample-time.  This will simplify
         //  calculations throughout.
@@ -96,10 +108,23 @@ namespace Msccs.Game.Demos {
         #region Methods
 
         void Start() {
+            gameManager = GameObject.Find("GameManager");
+            //PlayerPrefs.SetFloat("noteSpeed", noteSpeed);
+            //PlayerPrefs.SetFloat("hitDelay", hitDelay);
+            noteSpeed = PlayerPrefs.GetFloat("noteSpeed", 6f);
+            hitDelay = PlayerPrefs.GetFloat("hitDelay", 0.08f);
+            gameManager.transform.position = new Vector3(0, (float)(-noteSpeed * hitDelay - (2 + 0.5) * noteSpeed / 6), 0);//holy shit
+            string songName;
+            if(PlayerPrefs.GetString("PlayMode", "Play") == "Play") {
+                songName = PlayerPrefs.GetString("SongName", GameStatics.songs[0].PlayBackName);
+                eventID = PlayerPrefs.GetString("Difficulty", "Easy");
+            } else {
+                songName = GameStatics.testSong.PlayBackName;
+                eventID = "Easy";
+            }
 
-            PlayerPrefs.SetFloat("noteSpeed", noteSpeed);
-            PlayerPrefs.SetFloat("hitDelay", hitDelay);
-
+            simpleMusicPlayer = GameObject.Find(songName).GetComponent<SimpleMusicPlayer>();
+            audioCom = GameObject.Find(songName).GetComponent<AudioSource>();
             Koreographer.Instance.EventDelayInSeconds = 0f;
             InitializeLeadIn();
 
@@ -166,7 +191,7 @@ namespace Msccs.Game.Demos {
                 if (timeLeftToPlay <= 0f) {
                     audioCom.time = -timeLeftToPlay;
                     audioCom.Play();
-
+                    pauseButton.gameObject.SetActive(true);
                     timeLeftToPlay = 0f;
                 }
             }
@@ -234,6 +259,38 @@ namespace Msccs.Game.Demos {
 
             // Reinitialize the lead-in-timing.
             InitializeLeadIn();
+        }
+
+
+        public void Pause() {
+            Debug.Log("pause");
+            pauseCanvas.gameObject.SetActive(true);
+            simpleMusicPlayer.Pause();
+        }
+
+        public void Resume() {
+            Debug.Log("resume");
+            pauseCanvas.gameObject.SetActive(false);
+            //Wait();
+            //Thread.Sleep(500);
+            simpleMusicPlayer.Play();
+        }
+
+        //public IEnumerator Wait() {
+        //    yield return new WaitForSecondsRealtime(1f);
+        //}
+
+        public void Retry() {
+            UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex);
+        }
+
+        public void Quit() {
+            if (PlayerPrefs.GetString("PlayMode", "Play") == "Play") {
+                UnityEngine.SceneManagement.SceneManager.LoadScene(3);//back to songlist
+            } else {
+                PlayerPrefs.SetString("PlayMode", "Play");
+                UnityEngine.SceneManagement.SceneManager.LoadScene(2);//back to settings
+            }
         }
 
         #endregion
