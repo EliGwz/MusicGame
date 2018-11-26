@@ -15,6 +15,6 @@ public class HelpController : MonoBehaviour {
 	}
 
     public void Back() {
-        UnityEngine.SceneManagement.SceneManager.LoadScene(0);
+        UnityEngine.SceneManagement.SceneManager.LoadScene(1);
     }
 }

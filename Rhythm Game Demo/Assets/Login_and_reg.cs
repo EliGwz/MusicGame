@@ -75,7 +75,7 @@ public class Login_and_reg : MonoBehaviour {
                 {
                     ShowText.text = "Congratulations! ";
 
-                    SceneManager.LoadScene(1);
+                    SceneManager.LoadScene(4);
                 }
                 else if (www.text == "exist")
                 {
@@ -89,7 +89,7 @@ public class Login_and_reg : MonoBehaviour {
                 {
                     ShowText.text = "Login Successful!";
                     
-                    SceneManager.LoadScene(1); 
+                    SceneManager.LoadScene(4); 
                 }
                 else if (www.text == "fail")
                 {

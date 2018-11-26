@@ -97,10 +97,10 @@ public class SongSelectionController : MonoBehaviour {
 
     public void Play() {
         PlayerPrefs.SetString("PlayMode", "Play");
-        UnityEngine.SceneManagement.SceneManager.LoadScene(4);
+        UnityEngine.SceneManagement.SceneManager.LoadScene(5);
     }
 
     public void Back() {
-        UnityEngine.SceneManagement.SceneManager.LoadScene(0);
+        UnityEngine.SceneManagement.SceneManager.LoadScene(1);
     }
 }

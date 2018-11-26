@@ -49,15 +49,15 @@ public class ScoreSceneController : MonoBehaviour {
     }
 
     public void Retry() {
-        UnityEngine.SceneManagement.SceneManager.LoadScene(4);
+        UnityEngine.SceneManagement.SceneManager.LoadScene(5);
     }
 
     public void Next() {
         if (PlayerPrefs.GetString("PlayMode", "Play") == "Play") {
-            UnityEngine.SceneManagement.SceneManager.LoadScene(3);//back to songlist
+            UnityEngine.SceneManagement.SceneManager.LoadScene(4);//back to songlist
         } else {
             PlayerPrefs.SetString("PlayMode", "Play");
-            UnityEngine.SceneManagement.SceneManager.LoadScene(2);//back to settings
+            UnityEngine.SceneManagement.SceneManager.LoadScene(3);//back to settings
         }
     }
 }
