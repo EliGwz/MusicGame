@@ -128,7 +128,7 @@ public class GameManager : MonoBehaviour {
     public void GameEnd() {//successfully ended a song
         Debug.Log("end");
         PlayerPrefs.SetInt("MaxCombo", maxCombo);
-        UnityEngine.SceneManagement.SceneManager.LoadScene(5);
+        UnityEngine.SceneManagement.SceneManager.LoadScene(6);
     }
 
     public void Failed() {//failed to complete a song
