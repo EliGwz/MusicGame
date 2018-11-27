@@ -101,7 +101,7 @@ public class SettingsController : MonoBehaviour {
 
     public void Test() {
         PlayerPrefs.SetString("PlayMode", "Test");
-        UnityEngine.SceneManagement.SceneManager.LoadScene(4);
+        UnityEngine.SceneManagement.SceneManager.LoadScene(5); // to SampleScene
     }
 
 }
