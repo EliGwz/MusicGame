@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Scenes/Song list.unity
+- path: Assets/Scenes/Opening CG.unity
   isLoaded: 1
   isActive: 1
