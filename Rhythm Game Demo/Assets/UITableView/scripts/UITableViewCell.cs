@@ -44,14 +44,14 @@ public class UITableViewCell : MonoBehaviour
 	//}
 
 
-	private int userScore;
+	private string userScore;
 
-	public int UserScore
+	public string UserScore
 	{
 		set
 		{
 			userScore = value;
-			score.text = userScore.ToString();
+			score.text = userScore;
 		}
 	}
 

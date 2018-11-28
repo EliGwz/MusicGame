@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657838, g: 0.49641234, b: 0.57481676, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2273,7 +2273,7 @@ MonoBehaviour:
   tableViewCell: {fileID: 1075084909446686, guid: 62ac2733c61f81c41bc8bffaed7a7369,
     type: 2}
   icon: {fileID: 21300000, guid: 787fd03be558dc04db5761782a95bdaf, type: 3}
-  cells: 15
+  cells: 10
   Song_id: 0
 --- !u!114 &915622278
 MonoBehaviour:
@@ -3193,7 +3193,7 @@ Prefab:
     - target: {fileID: 224708886193231754, guid: 62ac2733c61f81c41bc8bffaed7a7369,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: -168.69217
+      value: -177.8
       objectReference: {fileID: 0}
     - target: {fileID: 224708886193231754, guid: 62ac2733c61f81c41bc8bffaed7a7369,
         type: 2}
@@ -3203,7 +3203,7 @@ Prefab:
     - target: {fileID: 224708886193231754, guid: 62ac2733c61f81c41bc8bffaed7a7369,
         type: 2}
       propertyPath: m_SizeDelta.y
-      value: 100
+      value: 81.7
       objectReference: {fileID: 0}
     - target: {fileID: 224708886193231754, guid: 62ac2733c61f81c41bc8bffaed7a7369,
         type: 2}

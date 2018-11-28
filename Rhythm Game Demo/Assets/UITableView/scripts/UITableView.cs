@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 using UnityEngine;
 
 public class UITableView : MonoBehaviour {
@@ -44,11 +45,24 @@ public class UITableView : MonoBehaviour {
                 tableViewCellScript.UserRank = "No ";
                 tableViewCellScript.UserName = "Record ";
                 tableViewCellScript.SetIcon(icon);
-                tableViewCellScript.UserScore = 0;
+                tableViewCellScript.UserScore = "0";
             }
             else
             {
+                var received_data = Regex.Split(www.text, "</next>");
+                int num = (received_data.Length - 1) / 2;
 
+                for (int i = 0; i < num; i++)
+                {
+                    GameObject cell = Instantiate(tableViewCell);
+                    cell.transform.SetParent(view.transform, false);
+                    UITableViewCell tableViewCellScript = cell.GetComponent<UITableViewCell>();
+                    tableViewCellScript.UserRank = (i + 1).ToString();
+                    tableViewCellScript.UserName = received_data[2 * i];
+                    tableViewCellScript.UserScore = received_data[2 * i + 1];
+                    if (i < 3) tableViewCellScript.SetIcon(icon);
+                    if (i == 9) break;
+                }
             }
         }
     }
@@ -57,15 +71,15 @@ public class UITableView : MonoBehaviour {
     void Start () {
 		float height = tableView.rect.height;
 
-		if (height < 100 * cells)
+		if (height < 85 * cells)
 		{
-			height = 100 * cells;
+			height = 85 * cells;
 		}
 
 		view.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, height);
 		view.SetPositionAndRotation(new Vector3(view.position.x, -height / 2, 0), Quaternion.Euler(0, 0, 0));
 
-        Song_id = 555;//test
+        Song_id = 1;//test
         CreateMainForm(Song_id);
 
         //for (int i = 0; i < cells; i++)
