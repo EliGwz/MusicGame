@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class GameManager : MonoBehaviour {
 
@@ -15,6 +16,7 @@ public class GameManager : MonoBehaviour {
     public static float volumeThreshold;//the minimum volume to hit voice notes
     AudioClip micRecord;
     public Text hitText;
+    //public TextMeshProUGUI hitTextMesh;
 
 	// Use this for initialization
 	void Start () {

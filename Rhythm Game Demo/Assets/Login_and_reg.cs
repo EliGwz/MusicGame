@@ -4,11 +4,13 @@ using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using TMPro;
 
 public class Login_and_reg : MonoBehaviour {
     public InputField ID;
     public InputField Pwd;
-    public Text ShowText;
+    public TextMeshProUGUI ShowText;
+    //public Text ShowText;
     private string Url = "https://i.cs.hku.hk/~wzgao/Login_and_reg.php";
     bool action;
     private GameObject Login_btn, Reg_btn;
