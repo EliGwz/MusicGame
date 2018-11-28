@@ -122,9 +122,10 @@ namespace Msccs.Game.Demos {
                 songName = GameStatics.testSong.PlayBackName;
                 eventID = "Easy";
             }
-
+            Debug.Log(songName);
             simpleMusicPlayer = GameObject.Find(songName).GetComponent<SimpleMusicPlayer>();
             audioCom = GameObject.Find(songName).GetComponent<AudioSource>();
+
             Koreographer.Instance.EventDelayInSeconds = 0f;
             InitializeLeadIn();
 
@@ -135,11 +136,19 @@ namespace Msccs.Game.Demos {
             //Debug.Log(noteLanes.Count);//9
 
             // Initialize events.
-            playingKoreo = Koreographer.Instance.GetKoreographyAtIndex(0);
+
+            if(songName== GameStatics.songs[0].PlayBackName) {
+                playingKoreo = Koreographer.Instance.GetKoreographyAtIndex(0);
+            } else {
+                playingKoreo = Koreographer.Instance.GetKoreographyAtIndex(1);
+            }
+            
+            //playingKoreo = Koreographer.Instance.
 
             // Grab all the events out of the Koreography.
-            KoreographyTrack rhythmTrack = playingKoreo.GetTrackByID(eventID);
+            KoreographyTrack rhythmTrack = playingKoreo.GetTrackByID(eventID);//Easy or Hard
             List<KoreographyEvent> rawEvents = rhythmTrack.GetAllEvents();
+            Debug.Log(rawEvents.Count);
 
             for (int i = 0; i < rawEvents.Count; ++i) {
                 KoreographyEvent evt = rawEvents[i];
