@@ -692,7 +692,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 5.5}
+  m_Size: {x: 1, y: 12}
   m_EdgeRadius: 0
 --- !u!4 &21169358 stripped
 Transform:
@@ -1328,7 +1328,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 5.5}
+  m_Size: {x: 1, y: 12}
   m_EdgeRadius: 0
 --- !u!4 &226292143 stripped
 Transform:
@@ -4046,7 +4046,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 5.5}
+  m_Size: {x: 1, y: 12}
   m_EdgeRadius: 0
 --- !u!4 &734288456 stripped
 Transform:
@@ -5508,7 +5508,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 5.5}
+  m_Size: {x: 1, y: 12}
   m_EdgeRadius: 0
 --- !u!4 &995484288 stripped
 Transform:
@@ -6448,7 +6448,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 5.5}
+  m_Size: {x: 1, y: 12}
   m_EdgeRadius: 0
 --- !u!4 &1105137461 stripped
 Transform:
@@ -8674,7 +8674,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 5.5}
+  m_Size: {x: 1, y: 12}
   m_EdgeRadius: 0
 --- !u!4 &1488687161 stripped
 Transform:
@@ -11386,7 +11386,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 5.5}
+  m_Size: {x: 1, y: 12}
   m_EdgeRadius: 0
 --- !u!4 &1890642180 stripped
 Transform:
@@ -11865,7 +11865,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 5.5}
+  m_Size: {x: 1, y: 12}
   m_EdgeRadius: 0
 --- !u!4 &1950759719 stripped
 Transform:
