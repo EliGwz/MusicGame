@@ -75,5 +75,9 @@ public class UITableViewCell : MonoBehaviour
 	public void SetIcon(Sprite ico)
 	{
 		icon.sprite = ico;
+        var r = icon.color.r;
+        var g = icon.color.g;
+        var b = icon.color.b;
+        icon.color = new Color(r, g, b, 255);
 	}
 }
