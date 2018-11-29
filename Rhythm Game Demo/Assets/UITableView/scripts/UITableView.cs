@@ -79,7 +79,7 @@ public class UITableView : MonoBehaviour {
 		view.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, height);
 		view.SetPositionAndRotation(new Vector3(view.position.x, -height / 2, 0), Quaternion.Euler(0, 0, 0));
 
-        Song_id = SongSelectionController.songIndex;//test
+        Song_id = PlayerPrefs.GetInt("SongIndex", 0);
         CreateMainForm(Song_id);
 
         //for (int i = 0; i < cells; i++)
@@ -100,7 +100,7 @@ public class UITableView : MonoBehaviour {
     {
         //Update Leaderboard
         view.DetachChildren();
-        Song_id = SongSelectionController.songIndex;//test
+        Song_id = PlayerPrefs.GetInt("SongIndex", 0);
         CreateMainForm(Song_id);
     }
 

@@ -13,7 +13,7 @@ public class SongSelectionController : MonoBehaviour {
     public Text bpm;
     public Text songName;
     public Text noteSpeed;
-    public static int songIndex;
+    public int songIndex;
     public AudioSource songDemo;
     float speed;
     Color easyColor = new Color(0.3f, 1f, 0f);
@@ -89,6 +89,7 @@ public class SongSelectionController : MonoBehaviour {
         songName.text = GameStatics.songs[songIndex].Name;
         songImage.texture = Resources.Load(GameStatics.songs[songIndex].ImagePath) as Texture2D;
         PlayerPrefs.SetString("SongName", GameStatics.songs[songIndex].PlayBackName);//should made koreography's name integrated with playBackName
+        PlayerPrefs.SetInt("SongIndex", songIndex);
         songDemo.Stop();
         songDemo.clip = Resources.Load(GameStatics.songs[songIndex].MusicDemoPath) as AudioClip;
         songDemo.Play();
