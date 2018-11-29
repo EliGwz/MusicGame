@@ -38,7 +38,7 @@ public class UITableView : MonoBehaviour {
 
             if (www.text == "empty")
             {
-                Debug.Log("empty!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+                Debug.Log("empty!!!!!!");
                 GameObject cell = Instantiate(tableViewCell);
                 cell.transform.SetParent(view.transform, false);
                 UITableViewCell tableViewCellScript = cell.GetComponent<UITableViewCell>();
@@ -79,7 +79,7 @@ public class UITableView : MonoBehaviour {
 		view.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, height);
 		view.SetPositionAndRotation(new Vector3(view.position.x, -height / 2, 0), Quaternion.Euler(0, 0, 0));
 
-        Song_id = 1;//test
+        Song_id = SongSelectionController.songIndex;//test
         CreateMainForm(Song_id);
 
         //for (int i = 0; i < cells; i++)
@@ -95,9 +95,17 @@ public class UITableView : MonoBehaviour {
         //}
 
     }
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+
+    public void updateLeaderBoard()
+    {
+        //Update Leaderboard
+        view.DetachChildren();
+        Song_id = SongSelectionController.songIndex;//test
+        CreateMainForm(Song_id);
+    }
+
+    // Update is called once per frame
+    void Update () {
+        
+    }
 }

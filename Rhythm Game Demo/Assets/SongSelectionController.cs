@@ -13,7 +13,7 @@ public class SongSelectionController : MonoBehaviour {
     public Text bpm;
     public Text songName;
     public Text noteSpeed;
-    public int songIndex;
+    public static int songIndex;
     public AudioSource songDemo;
     float speed;
     Color easyColor = new Color(0.3f, 1f, 0f);
@@ -54,8 +54,7 @@ public class SongSelectionController : MonoBehaviour {
         if (songIndex < 0) {
             songIndex = GameStatics.songs.Length - 1;
         }
-        LoadSongInfo(songIndex);
-
+        LoadSongInfo(songIndex);  
     }
 
     public void MoveRight() {
