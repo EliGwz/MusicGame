@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Activator : MonoBehaviour {
 
-    
+    public ParticleSystem particle;
 
     public KeyCode key;
     bool active = false;
@@ -54,6 +54,7 @@ public class Activator : MonoBehaviour {
                 Destroy(hit.collider.gameObject);
                 Debug.Log(hitPosition);
                 AddScore(System.Math.Abs(hitPosition), 2);
+                //particle.Play();
             }
         }
 
@@ -84,6 +85,8 @@ public class Activator : MonoBehaviour {
                             //***** change color
                             if (hit) {
                                 //Debug.Log("hit");
+                                particle.Stop();
+                                particle.Play();
                                 float hitPosition = hit.point.y + hitDelay * noteSpeed;
                                 if (Input.GetTouch(i).phase == TouchPhase.Began) {
                                     Destroy(hit.collider.gameObject);
@@ -153,13 +156,14 @@ public class Activator : MonoBehaviour {
             PlayerPrefs.SetInt("Score", PlayerPrefs.GetInt("Score") + gameManager.GetComponent<GameManager>().GetScore(0));
             gameManager.GetComponent<GameManager>().AddStat(4);
         }
-        
-        
+        //particle.Stop();
+        //particle.Play();
         gameManager.GetComponent<GameManager>().AddStreak();
     }
 
 
     public IEnumerator Pressed() {
+        //particle.Play();
         sr.color = clickedColor;
         yield return new WaitForSeconds(0.07f);
         sr.color = color;

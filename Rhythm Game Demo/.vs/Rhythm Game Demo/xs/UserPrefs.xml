@@ -1,13 +1,14 @@
 ﻿<Properties StartupConfiguration="{0F7C7B5F-4C63-8218-2EEC-AADC18074E9C}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/GameManager.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Activator.cs">
     <Files>
       <File FileName="Assets/HelpController.cs" Line="21" Column="1" />
       <File FileName="Assets/MainManuController.cs" Line="26" Column="63" />
-      <File FileName="Assets/Activator.cs" Line="5" Column="14" />
+      <File FileName="Assets/Activator.cs" Line="48" Column="77" />
       <File FileName="Assets/Login_and_reg.cs" Line="12" Column="5" />
       <File FileName="Assets/SettingsController.cs" Line="104" Column="81" />
-      <File FileName="Assets/GameController.cs" Line="291" Column="55" />
+      <File FileName="Assets/GameController.cs" Line="291" Column="1" />
       <File FileName="Assets/GameManager.cs" Line="17" Column="25" />
+      <File FileName="Assets/Koreographer/Demos/Scripts/EmitParticlesOnSpan.cs" Line="19" Column="26" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
