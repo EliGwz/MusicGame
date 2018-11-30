@@ -19,6 +19,7 @@ public class Login_and_reg : MonoBehaviour {
     void Start () {
         Login_btn = GameObject.Find("Button_Login");
         Reg_btn = GameObject.Find("Button_Reg");
+        PlayerPrefs.SetString("UserID", "***");
 
         Login_btn.GetComponent<Button>().onClick.AddListener(Button_Login);
         Reg_btn.GetComponent<Button>().onClick.AddListener(Button_Reg);
@@ -33,14 +34,28 @@ public class Login_and_reg : MonoBehaviour {
     {
         ShowText.text = "login";
         action = true;
-        CreateMainForm(ID.text, Pwd.text, action);
+        if (ID.text != "***") {
+            CreateMainForm(ID.text, Pwd.text, action);
+        }
+        else
+        {
+            ShowText.text = "The user name cannot be \"***\"";
+        }
     }
 
     public void Button_Reg()
     {
         ShowText.text = "reg";
         action = false;
-        CreateMainForm(ID.text, Pwd.text, action);
+        if (ID.text != "***")
+        {
+            CreateMainForm(ID.text, Pwd.text, action);
+        }
+        else
+        {
+            ShowText.text = "The user name cannot be \"***\"";
+        }
+        
     }
 
     public void CreateMainForm(string id, string pwd, bool action)
@@ -76,7 +91,7 @@ public class Login_and_reg : MonoBehaviour {
                 if (www.text == "success")
                 {
                     ShowText.text = "Congratulations! ";
-
+                    PlayerPrefs.SetString("UserID", ID.text);
                     SceneManager.LoadScene(4);
                 }
                 else if (www.text == "exist")
@@ -90,7 +105,7 @@ public class Login_and_reg : MonoBehaviour {
                 if (www.text == "success")
                 {
                     ShowText.text = "Login Successful!";
-                    
+                    PlayerPrefs.SetString("UserID", ID.text);
                     SceneManager.LoadScene(4); 
                 }
                 else if (www.text == "fail")

@@ -17,6 +17,7 @@ public class ScoreSceneController : MonoBehaviour {
     public RawImage scoreRanking;
     public AudioSource scoreSound;
     public AudioSource cheersSound;
+    private string Url = "https://i.cs.hku.hk/~wzgao/Upload_score.php";
 
     // Use this for initialization
     void Start () {
@@ -46,6 +47,41 @@ public class ScoreSceneController : MonoBehaviour {
             scoreRanking.texture = Resources.Load(GameStatics.rankDPath) as Texture2D;
         }
         scoreSound.Play();
+
+
+        //Upload Score
+        if (PlayerPrefs.GetString("UserID") != "***")
+        {
+            CreateMainForm(PlayerPrefs.GetString("UserID"), PlayerPrefs.GetInt("SongIndex"), PlayerPrefs.GetInt("Score"));
+        }
+        else
+        {
+            Debug.Log("not login");
+        }
+        
+    }
+
+    public void CreateMainForm(string usrId, int songId, int score)
+    {
+        WWWForm form = new WWWForm();
+        form.AddField("usr_ID", usrId);
+        form.AddField("song_ID", songId);
+        form.AddField("score", score);
+        StartCoroutine(SendPost(Url, form));
+    }
+
+    IEnumerator SendPost(string url, WWWForm form)
+    {
+        WWW www = new WWW(url, form);
+        yield return www;
+        if (www.error != null)
+        {
+            Debug.Log(www.error);
+        }
+        else
+        {
+            Debug.Log(www.text);
+        }
     }
 
     public void Retry() {
