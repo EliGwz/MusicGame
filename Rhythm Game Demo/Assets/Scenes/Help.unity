@@ -308,11 +308,11 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_text: "1. Login or sign up, or just play without login. Your score will be shown
-    if you login to play.\n2. Adjust node display offset, hit offset and volume threshold
-    in \"Settings\" .\n3. Select a song in the song list.\n4. Play the song:\n    a)
-    Hit when a green note drops down\n    b) Slide when a series of yellow notes drop
-    down\n    c) Scream out loud when a long note drops down\n4. Scores will be calculated
-    automatically after a song is finished."
+    in the leaderboard if you login to play.\n2. Adjust node display offset, hit offset
+    and volume threshold in \"Settings\" .\n3. Select a song in the song list.\n4.
+    Play the song:\n    a) Hit when a green note drops down\n    b) Slide when a series
+    of yellow notes drop down\n    c) Scream out loud when a long note drops down\n5.
+    Scores will be calculated automatically after a song is finished."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -380,10 +380,10 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: -2.9323502, w: -0.000037273432}
   m_textInfo:
     textComponent: {fileID: 530059703}
-    characterCount: 440
+    characterCount: 459
     spriteCount: 0
-    spaceCount: 95
-    wordCount: 83
+    spaceCount: 98
+    wordCount: 86
     linkCount: 0
     lineCount: 10
     pageCount: 1
