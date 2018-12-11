@@ -33,13 +33,13 @@ public class ScoreSceneController : MonoBehaviour {
         score.text = PlayerPrefs.GetInt("Score") + "";
         float techScore = PlayerPrefs.GetInt("Perfect") + PlayerPrefs.GetInt("Great") * 0.7f + PlayerPrefs.GetInt("Good") * 0.4f + PlayerPrefs.GetInt("Bad") * 0.1f;
         float fullScore = PlayerPrefs.GetInt("Perfect") + PlayerPrefs.GetInt("Great") + PlayerPrefs.GetInt("Good") + PlayerPrefs.GetInt("Bad") + PlayerPrefs.GetInt("Miss");
-        if (techScore / fullScore >= 0.97) {//S
+        if (techScore / fullScore >= 0.95) {//S
             scoreRanking.texture = Resources.Load(GameStatics.rankSPath) as Texture2D;
             cheersSound.PlayOneShot(Resources.Load(GameStatics.cheersPath) as AudioClip);
-        } else if (techScore / fullScore >= 0.92) {//A
+        } else if (techScore / fullScore >= 0.9) {//A
             scoreRanking.texture = Resources.Load(GameStatics.rankAPath) as Texture2D;
             cheersSound.PlayOneShot(Resources.Load(GameStatics.cheersPath) as AudioClip);
-        } else if (techScore / fullScore >= 0.85) {//B
+        } else if (techScore / fullScore >= 0.8) {//B
             scoreRanking.texture = Resources.Load(GameStatics.rankBPath) as Texture2D;
         } else if (techScore / fullScore >= 0.7) {//C
             scoreRanking.texture = Resources.Load(GameStatics.rankCPath) as Texture2D;

@@ -18,6 +18,8 @@ public class GameManager : MonoBehaviour {
     public Text hitText;
     //public TextMeshProUGUI hitTextMesh;
 
+    public Camera camera;
+
 	// Use this for initialization
 	void Start () {
         PlayerPrefs.SetInt("Score", 0);
@@ -79,10 +81,7 @@ public class GameManager : MonoBehaviour {
         }
         multiplier = (streak / 10) + 1;
         PlayerPrefs.SetInt("Multiplier", multiplier);
-        //if (streak == 10) {
-
-        //}
-        //UpdateGUI();
+        UpdateGUI();
     }
 
     public void AddStat(int stat) {//add statistics for a play. 0-4 means Miss, Bad, Good, Great and Perfect respectively.
@@ -98,13 +97,12 @@ public class GameManager : MonoBehaviour {
         PlayerPrefs.SetInt("Streak", 0);
         multiplier = 1;
         PlayerPrefs.SetInt("Multiplier", multiplier);
-        //UpdateGUI();
+        UpdateGUI();
     }
 
-    //void UpdateGUI() {
-    //    PlayerPrefs.SetInt("Streak", streak);
-    //    PlayerPrefs.SetInt("Multiplier", multiplier);
-    //}
+    void UpdateGUI() {
+        camera.backgroundColor = new Color(streak / 255f, streak / 255f, streak / 255f, 0);
+    }
 
     public int GetScore(float hitPosition) {
         int accuracy;

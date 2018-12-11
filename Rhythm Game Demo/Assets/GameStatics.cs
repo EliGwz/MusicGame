@@ -99,9 +99,11 @@ public static class GameStatics{
 
     public static Song[] songs = {
         new Song("Together Again", "152", "00:37", "SongImages/TogetherAgain","Music_TogetherAgain","SongDemos/TogetherAgain"),
-        new Song("Blade Dance", "187", "01:30", "SongImages/BladeDance","Music_BladeDance","SongDemos/BladeDance"),
-        new Song("Blade Dance2", "1872", "01:302", "SongImages/Astral_Zero", "Music_BladeDance","SongDemos/BladeDance2"),
-        new Song("Blade Dance3", "18724", "01:30322", "SongImages/BladeDance", "Music_BladeDance","SongDemos/BladeDance") };
+        new Song("Blade Dance", "187", "01:30", "SongImages/BladeDance","Music_BladeDance","SongDemos/BladeDance")};
+
+    //,
+    //    new Song("Blade Dance2", "1872", "01:302", "SongImages/Astral_Zero", "Music_BladeDance","SongDemos/BladeDance2"),
+    //    new Song("Blade Dance3", "18724", "01:30322", "SongImages/BladeDance", "Music_BladeDance","SongDemos/BladeDance")
 
     //public static Song testSong = new Song("Blade Dance", "187", "01:30", "SongImages/BladeDance", "Music_BladeDance", "SongDemos/BladeDance");
     public static Song testSong = new Song("Together Again", "152", "00:37", "SongImages/TogetherAgain", "Music_TogetherAgain", "SongDemos/TogetherAgain");

@@ -94,9 +94,9 @@ public class Activator : MonoBehaviour {
                                     if (hit.transform.tag == "note") {
                                         AddScore(System.Math.Abs(hitPosition), 0);
                                     } else if (hit.transform.tag == "slider") {
-                                        AddScore(System.Math.Abs(hitPosition), 1);
+                                        AddScore(System.Math.Abs(hitPosition), 0);//regard slider as normal note if the slider is clicked rather than dragged.
                                     }
-                                } else if (Input.GetTouch(i).phase == TouchPhase.Moved) {
+                                } else if (Input.GetTouch(i).phase == TouchPhase.Moved) {//the slider is dragged
                                     if (hit.transform.tag == "slider" && System.Math.Abs(hitPosition) < 0.3*2/noteSpeed*6) {
                                         Destroy(hit.collider.gameObject);
                                         Debug.Log(hitPosition);
@@ -144,8 +144,8 @@ public class Activator : MonoBehaviour {
     }
 
     void AddScore(float hitPosition, int type) {//0 for note, 1 for slider, 2 for voice
-        float speedParameter = PlayerPrefs.GetFloat("noteSpeed") / 6;
-        if (type == 0 && type == 2) {
+        float speedParameter = PlayerPrefs.GetFloat("noteSpeed") / 6;//normally equals 1
+        if (type == 0 || type == 2) {
             PlayerPrefs.SetInt("Score", PlayerPrefs.GetInt("Score") + gameManager.GetComponent<GameManager>().GetScore(hitPosition));
             if((int)(hitPosition / 0.3 /speedParameter) > 2) {
                 gameManager.GetComponent<GameManager>().AddStat(5 - (int)(hitPosition / 0.3 / speedParameter));

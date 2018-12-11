@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657838, g: 0.49641234, b: 0.57481676, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2528,7 +2528,7 @@ GameObject:
   - component: {fileID: 422044210}
   - component: {fileID: 422044209}
   m_Layer: 5
-  m_Name: Text (2)
+  m_Name: Score multiplier
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2816,6 +2816,11 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!198 &476427106 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 198217175471904032, guid: dc5680a51fb314b2e88941049b13c7a3,
+    type: 2}
+  m_PrefabInternal: {fileID: 1082360065}
 --- !u!1001 &508500184
 Prefab:
   m_ObjectHideFlags: 0
@@ -3203,7 +3208,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0.015619444, g: 0.04256409, b: 0.084905684, a: 0}
+  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 0}
   m_projectionMatrixMode: 1
   m_SensorSize: {x: 36, y: 24}
   m_LensShift: {x: 0, y: 0}
@@ -4975,7 +4980,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 880, y: -421.99997}
+  m_AnchoredPosition: {x: 880, y: 157}
   m_SizeDelta: {x: 150, y: 90}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &836174876
@@ -5832,6 +5837,11 @@ Prefab:
       propertyPath: hitDelay
       value: 0.08
       objectReference: {fileID: 0}
+    - target: {fileID: 114909628006060246, guid: 9166e3844d0185745b533850bbb482a1,
+        type: 2}
+      propertyPath: particle
+      value: 
+      objectReference: {fileID: 476427106}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9166e3844d0185745b533850bbb482a1, type: 2}
   m_IsPrefabAsset: 0
@@ -7044,7 +7054,7 @@ GameObject:
   - component: {fileID: 1147242760}
   - component: {fileID: 1147242759}
   m_Layer: 5
-  m_Name: Text (1)
+  m_Name: Combo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7548,7 +7558,7 @@ GameObject:
   - component: {fileID: 1189298344}
   - component: {fileID: 1189298346}
   m_Layer: 5
-  m_Name: Text
+  m_Name: Score
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -12734,6 +12744,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   volume0: 0
   hitText: {fileID: 78456819}
+  camera: {fileID: 534669904}
 --- !u!1 &1982981464
 GameObject:
   m_ObjectHideFlags: 0
