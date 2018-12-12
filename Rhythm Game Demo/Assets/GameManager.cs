@@ -101,7 +101,9 @@ public class GameManager : MonoBehaviour {
     }
 
     void UpdateGUI() {
-        camera.backgroundColor = new Color(streak / 255f, streak / 255f, streak / 255f, 0);
+        if (streak <= 100) {
+            camera.backgroundColor = new Color(streak / 255f, streak / 255f, streak / 255f, 0);
+        }
     }
 
     public int GetScore(float hitPosition) {

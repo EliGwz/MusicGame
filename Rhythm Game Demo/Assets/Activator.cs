@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Activator : MonoBehaviour {
 
@@ -15,6 +16,7 @@ public class Activator : MonoBehaviour {
     Color clickedColor;
     public bool createMode;//for creating maps
     public GameObject cloneNote;//for creating maps
+    public Text debugPosition;
 
     Ray ray;//for tapping
     Ray voiceRay;
@@ -41,7 +43,8 @@ public class Activator : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-        float hitDelay = PlayerPrefs.GetFloat("hitDelay");//these should be set before entering the game play scene
+        float hitDelay = PlayerPrefs.GetFloat("hitDelay",0f);//these should be set before entering the game play scene
+        float voiceHitDelay = PlayerPrefs.GetFloat("voiceHitDelay", 0.16f);
         float noteSpeed = PlayerPrefs.GetFloat("noteSpeed");
 
         if (gameObject.name == "Activator" && GameManager.volume > GameManager.volumeThreshold) {//only one activator works on this
@@ -50,11 +53,14 @@ public class Activator : MonoBehaviour {
             hit = Physics2D.Raycast(voiceRay.origin - new Vector3(0, noteSpeed * hitDelay, 1), voiceRay.direction, 4f*noteSpeed/6f, voiceLayerMask);
             if (hit) {
                 //Debug.Log("hit");
-                float hitPosition = hit.point.y + hitDelay * noteSpeed;
-                Destroy(hit.collider.gameObject);
-                Debug.Log(hitPosition);
-                AddScore(System.Math.Abs(hitPosition), 2);
-                //particle.Play();
+                float hitPosition = hit.point.y + voiceHitDelay * noteSpeed;
+                if(System.Math.Abs(hitPosition) < 0.3 * 2 / noteSpeed * 6) {//only accept perfect, great and good
+                    Destroy(hit.collider.gameObject);
+                    Debug.Log(hitPosition);
+                    AddScore(System.Math.Abs(hitPosition), 2);
+                    
+                    //particle.Play();
+                }
             }
         }
 
@@ -91,15 +97,17 @@ public class Activator : MonoBehaviour {
                                 if (Input.GetTouch(i).phase == TouchPhase.Began) {
                                     Destroy(hit.collider.gameObject);
                                     Debug.Log(hitPosition);
+                                    //debugPosition.text = hitPosition + "";
                                     if (hit.transform.tag == "note") {
                                         AddScore(System.Math.Abs(hitPosition), 0);
                                     } else if (hit.transform.tag == "slider") {
                                         AddScore(System.Math.Abs(hitPosition), 0);//regard slider as normal note if the slider is clicked rather than dragged.
                                     }
                                 } else if (Input.GetTouch(i).phase == TouchPhase.Moved) {//the slider is dragged
-                                    if (hit.transform.tag == "slider" && System.Math.Abs(hitPosition) < 0.3*2/noteSpeed*6) {
+                                    if (hit.transform.tag == "slider" && System.Math.Abs(hitPosition) < 0.3*3/noteSpeed*6) {
                                         Destroy(hit.collider.gameObject);
                                         Debug.Log(hitPosition);
+                                        //debugPosition.text = hitPosition + "";
                                         AddScore(System.Math.Abs(hitPosition), 1);
                                     }
                                 }

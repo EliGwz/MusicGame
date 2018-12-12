@@ -16,8 +16,8 @@ public class SettingsController : MonoBehaviour {
     // Use this for initialization
     void Start () {
         noteDisplay = PlayerPrefs.GetFloat("NoteDisplayOffset", 0.3f);
-        hit = PlayerPrefs.GetFloat("hitDelay", 0.08f);
-        volume = PlayerPrefs.GetFloat("VolumeThreshold", 0.3f);
+        hit = PlayerPrefs.GetFloat("hitDelay", 0f);
+        volume = PlayerPrefs.GetFloat("VolumeThreshold", 0.25f);
         noteDisplayOffset.text = noteDisplay.ToString("F2") + "";
         hitOffset.text = hit.ToString("F2") + "";
         volumeThreshold.text = volume.ToString("F2") + "";
@@ -35,8 +35,8 @@ public class SettingsController : MonoBehaviour {
 
     public void Reset() {
         noteDisplay = 0.3f;
-        hit = 0.08f;
-        volume = 0.3f;
+        hit = 0f;
+        volume = 0.25f;
         noteDisplayOffset.text = noteDisplay.ToString("F2") + "";
         hitOffset.text = hit.ToString("F2") + "";
         volumeThreshold.text = volume.ToString("F2") + "";
@@ -65,8 +65,8 @@ public class SettingsController : MonoBehaviour {
 
     public void DecreaseHitOffset() {
         hit -= 0.01f;
-        if (hit < 0) {
-            hit = 0;
+        if (hit < -1) {
+            hit = -1;
         }
         PlayerPrefs.SetFloat("hitDelay", hit);
         hitOffset.text = hit.ToString("F2") + "";
