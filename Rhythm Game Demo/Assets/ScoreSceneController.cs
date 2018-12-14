@@ -50,9 +50,10 @@ public class ScoreSceneController : MonoBehaviour {
 
 
         //Upload Score
-        if (PlayerPrefs.GetString("UserID") != "***")
+        if (PlayerPrefs.GetInt("LogStat") == 1 && PlayerPrefs.GetInt("Score") != 0)
         {
-            CreateMainForm(PlayerPrefs.GetString("UserID"), PlayerPrefs.GetInt("SongIndex"), PlayerPrefs.GetInt("Score"));
+            CreateMainForm(PlayerPrefs.GetString("UserID"), PlayerPrefs.GetInt("SongIndex"),
+                PlayerPrefs.GetInt("Score"), PlayerPrefs.GetString("Difficulty"));
         }
         else
         {
@@ -61,12 +62,13 @@ public class ScoreSceneController : MonoBehaviour {
         
     }
 
-    public void CreateMainForm(string usrId, int songId, int score)
+    public void CreateMainForm(string usrId, int songId, int score, string diff)
     {
         WWWForm form = new WWWForm();
         form.AddField("usr_ID", usrId);
         form.AddField("song_ID", songId);
         form.AddField("score", score);
+        form.AddField("song_diff", diff);
         StartCoroutine(SendPost(Url, form));
     }
 

@@ -15,11 +15,13 @@ public class UITableView : MonoBehaviour {
     //Var for access database
     private string Url = "https://i.cs.hku.hk/~wzgao/Get_leaderboard.php";
     public int Song_id;
+    public string Song_diff;
 
-    public void CreateMainForm(int song_id)
+    public void CreateMainForm(int song_id, string song_diff)
     {
         WWWForm form = new WWWForm();
         form.AddField("song_ID", song_id);
+        form.AddField("song_diff", song_diff);
         StartCoroutine(SendPost(Url, form));
     }
 
@@ -80,28 +82,17 @@ public class UITableView : MonoBehaviour {
 		view.SetPositionAndRotation(new Vector3(view.position.x, -height / 2, 0), Quaternion.Euler(0, 0, 0));
 
         Song_id = PlayerPrefs.GetInt("SongIndex", 0);
-        CreateMainForm(Song_id);
-
-        //for (int i = 0; i < cells; i++)
-        //{
-        //	GameObject cell = Instantiate(tableViewCell);
-        //	cell.transform.SetParent(view.transform, false);
-
-        //	UITableViewCell tableViewCellScript = cell.GetComponent<UITableViewCell>();
-        //	tableViewCellScript.UserRank = (i + 1).ToString();
-        //	tableViewCellScript.UserName = "Player " + (i + 1);
-        //	if (i+1 < 4) tableViewCellScript.SetIcon(icon);
-        //	tableViewCellScript.UserScore = (i + 1) * 3;
-        //}
-
+        Song_diff = PlayerPrefs.GetString("Difficulty", "Easy");
+        CreateMainForm(Song_id, Song_diff);
     }
 
     public void updateLeaderBoard()
     {
         //Update Leaderboard
         view.DetachChildren();
-        Song_id = PlayerPrefs.GetInt("SongIndex", 0);
-        CreateMainForm(Song_id);
+        Song_id = PlayerPrefs.GetInt("SongIndex");
+        Song_diff = PlayerPrefs.GetString("Difficulty");
+        CreateMainForm(Song_id, Song_diff);
     }
 
     // Update is called once per frame
