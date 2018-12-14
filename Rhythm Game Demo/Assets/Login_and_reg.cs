@@ -7,22 +7,44 @@ using UnityEngine.UI;
 using TMPro;
 
 public class Login_and_reg : MonoBehaviour {
-    public InputField ID;
-    public InputField Pwd;
+    //public InputField ID;
+    //public InputField Pwd;
     public TextMeshProUGUI ShowText;
     //public Text ShowText;
     private string Url = "https://i.cs.hku.hk/~wzgao/Login_and_reg.php";
     bool action;
-    private GameObject Login_btn, Reg_btn;
+    private GameObject Login_btn, Reg_btn, Logout_btn, ID, Pwd;
 
     // Use this for initialization
     void Start () {
         Login_btn = GameObject.Find("Button_Login");
         Reg_btn = GameObject.Find("Button_Reg");
-        PlayerPrefs.SetString("UserID", "***");
+        Logout_btn = GameObject.Find("Button_Logout");
+        ID = GameObject.Find("Input_ID");
+        Pwd = GameObject.Find("Input_PW");
+        PlayerPrefs.GetInt("LogStat", 0);
 
         Login_btn.GetComponent<Button>().onClick.AddListener(Button_Login);
         Reg_btn.GetComponent<Button>().onClick.AddListener(Button_Reg);
+        Logout_btn.GetComponent<Button>().onClick.AddListener(Button_Logout);
+
+        if (PlayerPrefs.GetInt("LogStat") == 0)
+        {
+            Login_btn.SetActive(true);
+            Reg_btn.SetActive(true);
+            Logout_btn.SetActive(false);
+            ID.SetActive(true);
+            Pwd.SetActive(true);
+        }
+        else
+        {
+            Login_btn.SetActive(false);
+            Reg_btn.SetActive(false);
+            Logout_btn.SetActive(true);
+            ID.SetActive(false);
+            Pwd.SetActive(false);
+        }
+        
 	}
 	
 	// Update is called once per frame
@@ -34,12 +56,12 @@ public class Login_and_reg : MonoBehaviour {
     {
         ShowText.text = "login";
         action = true;
-        if (ID.text != "***") {
-            CreateMainForm(ID.text, Pwd.text, action);
+        if (ID.GetComponent<InputField>().text != "") {
+            CreateMainForm(ID.GetComponent<InputField>().text, Pwd.GetComponent<InputField>().text, action);
         }
         else
         {
-            ShowText.text = "The user name cannot be \"***\"";
+            ShowText.text = "The user name cannot be NULL";
         }
     }
 
@@ -47,15 +69,21 @@ public class Login_and_reg : MonoBehaviour {
     {
         ShowText.text = "reg";
         action = false;
-        if (ID.text != "***")
+        if (ID.GetComponent<InputField>().text != "")
         {
-            CreateMainForm(ID.text, Pwd.text, action);
+            CreateMainForm(ID.GetComponent<InputField>().text, Pwd.GetComponent<InputField>().text, action);
         }
         else
         {
-            ShowText.text = "The user name cannot be \"***\"";
+            ShowText.text = "The user name cannot be NULL";
         }
         
+    }
+
+    public void Button_Logout()
+    {
+        PlayerPrefs.SetInt("LogStat", 0);
+        SceneManager.LoadScene(1);
     }
 
     public void CreateMainForm(string id, string pwd, bool action)
@@ -91,7 +119,8 @@ public class Login_and_reg : MonoBehaviour {
                 if (www.text == "success")
                 {
                     ShowText.text = "Congratulations! ";
-                    PlayerPrefs.SetString("UserID", ID.text);
+                    PlayerPrefs.SetString("UserID", ID.GetComponent<InputField>().text);
+                    PlayerPrefs.SetInt("LogStat", 1);
                     SceneManager.LoadScene(4);
                 }
                 else if (www.text == "exist")
@@ -105,7 +134,8 @@ public class Login_and_reg : MonoBehaviour {
                 if (www.text == "success")
                 {
                     ShowText.text = "Login Successful!";
-                    PlayerPrefs.SetString("UserID", ID.text);
+                    PlayerPrefs.SetString("UserID", ID.GetComponent<InputField>().text);
+                    PlayerPrefs.SetInt("LogStat", 1);
                     SceneManager.LoadScene(4); 
                 }
                 else if (www.text == "fail")
