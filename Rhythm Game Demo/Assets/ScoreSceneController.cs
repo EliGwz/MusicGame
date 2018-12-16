@@ -22,8 +22,13 @@ public class ScoreSceneController : MonoBehaviour {
     // Use this for initialization
     void Start () {
         int songIndex = PlayerPrefs.GetInt("SongIndex", 0);
-        songImage.texture = Resources.Load(GameStatics.songs[songIndex].ImagePath) as Texture2D;
-        songName.text = GameStatics.songs[songIndex].Name + " [" + PlayerPrefs.GetString("Difficulty", "Easy") + "]";
+        if (PlayerPrefs.GetString("PlayMode", "Play") == "Test") {
+            songImage.texture = Resources.Load(GameStatics.testSong.ImagePath) as Texture2D;
+            songName.text = GameStatics.testSong.Name + " [" + PlayerPrefs.GetString("Difficulty", "Easy") + "]";
+        } else {
+            songImage.texture = Resources.Load(GameStatics.songs[songIndex].ImagePath) as Texture2D;
+            songName.text = GameStatics.songs[songIndex].Name + " [" + PlayerPrefs.GetString("Difficulty", "Easy") + "]";
+        }
         perfect.text = PlayerPrefs.GetInt("Perfect") + "";
         great.text = PlayerPrefs.GetInt("Great") + "";
         good.text = PlayerPrefs.GetInt("Good") + "";
@@ -52,8 +57,10 @@ public class ScoreSceneController : MonoBehaviour {
         //Upload Score
         if (PlayerPrefs.GetInt("LogStat") == 1 && PlayerPrefs.GetInt("Score") != 0)
         {
-            CreateMainForm(PlayerPrefs.GetString("UserID"), PlayerPrefs.GetInt("SongIndex"),
+            if(PlayerPrefs.GetString("PlayMode", "Play") == "Play") {
+                CreateMainForm(PlayerPrefs.GetString("UserID"), PlayerPrefs.GetInt("SongIndex"),
                 PlayerPrefs.GetInt("Score"), PlayerPrefs.GetString("Difficulty"));
+            }
         }
         else
         {
