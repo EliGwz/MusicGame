@@ -73,13 +73,13 @@ public class UITableView : MonoBehaviour {
     void Start () {
 		float height = tableView.rect.height;
 
-		if (height < 85 * cells)
-		{
-			height = 85 * cells;
-		}
+        if (height < 10 * cells) {
+            height = 10 * cells;
+        }
 
-		view.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, height);
-		view.SetPositionAndRotation(new Vector3(view.position.x, -height / 2, 0), Quaternion.Euler(0, 0, 0));
+        view.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, height);
+        //view.SetPositionAndRotation(new Vector3(view.position.x, -height / 2, 0), Quaternion.Euler(0, 0, 0));
+        //view.SetPositionAndRotation(new Vector3(0, 0, 0), Quaternion.Euler(0, 0, 0));
 
         Song_id = PlayerPrefs.GetInt("SongIndex", 0);
         Song_diff = PlayerPrefs.GetString("Difficulty", "Easy");
